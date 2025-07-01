@@ -1,0 +1,443 @@
+/* Custom styles for grid cells */
+.grid-cell {
+    width: 35px;
+    /* Adjust as needed */
+    height: 35px;
+    /* Adjust as needed */
+    border: 1px solid #d1d5db;
+    /* Slightly lighter border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    /* Adjust as needed */
+    font-weight: bold;
+    position: relative;
+    border-radius: 4px;
+    /* Add slight rounding to cells */
+    overflow: hidden;
+    /* Hide overflow */
+    text-overflow: ellipsis;
+    /* Add ellipsis if content overflows */
+    white-space: nowrap;
+    /* Prevent wrapping */
+}
+
+.banker {
+    background-color: #ef4444;
+    /* Red-500 */
+    color: white;
+}
+
+.player {
+    background-color: #3b82f6;
+    /* Blue-500 */
+    color: white;
+}
+
+.tie {
+    background-color: #22c55e;
+    /* Green-500 */
+    color: white;
+    /* Optional: Style for tie count if implemented */
+    /* font-size: 0.7rem; */
+}
+
+/* General Button Styling (applied via classes below) */
+button {
+    padding: 10px 15px;
+    /* Default padding */
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+    margin: 0;
+    min-width: 100px;
+    /* Ensure minimum width */
+    text-align: center;
+    border-radius: 6px;
+    /* Rounded corners */
+    font-size: 0.9rem;
+    /* Default font size */
+    border: none;
+    line-height: 1.5;
+    font-family: 'Sarabun', sans-serif;
+    /* Ensure font */
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    /* Subtle shadow */
+}
+
+button:hover {
+    opacity: 0.9;
+    /* Slight fade on hover */
+}
+
+button:active {
+    transform: scale(0.98);
+    /* Subtle click effect */
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+    /* Inner shadow on click */
+}
+
+/* Specific Button Colors & Styles */
+.btn-banker {
+    background-color: #dc2626;
+    padding: 10px;
+    color: white;
+}
+
+/* Red-600 */
+.btn-banker:hover {
+    background-color: #b91c1c;
+    padding: 10px;
+    color: white;
+}
+
+/* Red-700 */
+
+.btn-player {
+    background-color: #2563eb;
+    padding: 10px;
+    color: white;
+}
+
+/* Blue-600 */
+.btn-player:hover {
+    background-color: #1d4ed8;
+    padding: 10px;
+    color: white;
+}
+
+/* Blue-700 */
+
+.btn-tie {
+    background-color: #16a34a;
+    padding: 10px;
+    color: white;
+}
+
+/* Green-600 */
+.btn-tie:hover {
+    background-color: #15803d;
+    padding: 10px;
+    color: white;
+}
+
+/* Green-700 */
+
+.btn-undo {
+    background-color: #f97316;
+    padding: 10px;
+    color: white;
+}
+
+/* Orange-500 */
+.btn-undo:hover {
+    background-color: #ea580c;
+    padding: 10px;
+    color: white;
+}
+
+/* Orange-600 */
+
+/* Removed .btn-reset-normal */
+
+.btn-reset-save {
+    background-color: #ca8a04;
+    padding: 10px;
+    color: white;
+}
+
+/* Yellow-600 */
+.btn-reset-save:hover {
+    background-color: #a16207;
+    padding: 10px;
+    color: white;
+}
+
+/* Yellow-700 */
+
+/* Session Management Buttons */
+.btn-save-session {
+    background-color: #9333ea;
+    width: 100%;
+}
+
+/* Purple-600 */
+.btn-save-session:hover {
+    background-color: #7e22ce;
+}
+
+/* Purple-700 */
+
+.btn-load-session {
+    background-color: #0ea5e9;
+    flex: 1;
+}
+
+/* Sky-500 */
+.btn-load-session:hover {
+    background-color: #0284c7;
+}
+
+/* Sky-600 */
+
+.btn-delete-session {
+    background-color: #e11d48;
+    flex: 1;
+}
+
+/* Rose-600 */
+.btn-delete-session:hover {
+    background-color: #be123c;
+}
+
+/* Rose-700 */
+
+.btn-new-session {
+    background-color: #6b7280;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+/* Gray-500 */
+.btn-new-session:hover {
+    background-color: #4b5563;
+}
+
+/* Gray-600 */
+
+
+/* Submit Sequence Button (Tailwind used mostly in HTML) */
+#btn-submit-sequence {
+    min-width: auto;
+    /* Override default min-width */
+    padding: 8px 12px;
+    /* Adjust padding */
+    font-size: 0.85rem;
+    /* Adjust font size */
+}
+
+/* Main Layout */
+body {
+    padding: 1rem;
+    /* Tailwind p-4 */
+    background-color: #f3f4f6;
+    /* bg-gray-100 */
+    min-height: 100vh;
+    /* font-family set in HTML head */
+}
+
+/* Sidebar and Main Content widths managed by Tailwind */
+.sidebar {
+    flex-shrink: 0;
+}
+
+.main-content {
+    flex-grow: 1;
+}
+
+.container {
+    background-color: white;
+    padding: 1.5rem;
+    /* Increased padding */
+    border-radius: 0.75rem;
+    /* 12px */
+    /* box-shadow managed by Tailwind in HTML */
+    width: 100%;
+}
+
+/* Adjust specific containers */
+.text-input-container,
+.summary-stats-container,
+.session-manager-container {
+    padding: 1.25rem;
+    /* Slightly less padding for sidebar containers */
+}
+
+/* Grid container wrapper */
+.grid-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    overflow-x: auto;
+    /* Enable horizontal scroll if needed */
+    padding-bottom: 10px;
+    /* Space for scrollbar */
+    border: 1px solid #e5e7eb;
+    /* Add a light border */
+    border-radius: 0.375rem;
+    /* Match container rounding */
+    background-color: #f9fafb;
+    /* Slightly off-white background */
+}
+
+.grid-container {
+    display: inline-grid;
+    /* Allows centering within the wrapper */
+    grid-template-columns: repeat(12, 35px);
+    /* Fixed column width */
+    gap: 2px;
+    /* Small gap between cells */
+    padding: 5px;
+    /* Padding inside the wrapper */
+}
+
+/* Controls container uses flex properties from Tailwind */
+.controls {
+    /* Styles applied via Tailwind classes in HTML */
+    /* Example: flex justify-center flex-wrap gap-3 mt-4 */
+}
+
+.prediction-area {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    /* Slightly less bold */
+    padding: 12px;
+    background-color: #e9ecef;
+    /* Light gray background */
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    /* Subtle border */
+    /* margin-top managed by gap or Tailwind class */
+    font-family: 'Sarabun', sans-serif;
+    /* Ensure font */
+    min-height: 48px;
+    /* Ensure consistent height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-container {
+    width: 100%;
+    height: 300px;
+    /* Default height */
+    position: relative;
+    /* Needed for Chart.js responsiveness */
+}
+
+/* Input and Select Styling */
+input[type="text"], select {
+    font-family: 'Sarabun', sans-serif;
+    padding: 0.6rem 0.75rem;
+    /* Adjust padding */
+    border: 1px solid #d1d5db;
+    /* Gray-300 */
+    border-radius: 0.375rem;
+    /* rounded-md */
+    box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+input[type="text"]:focus, select:focus {
+    outline: none;
+    border-color: #4f46e5;
+    /* Indigo-600 */
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.3);
+    /* Indigo focus ring */
+}
+
+select {
+    cursor: pointer;
+    background-color: white;
+    /* Ensure background for dropdown arrow */
+    /* Add appearance for cross-browser consistency if needed */
+    /* appearance: none; */
+    /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem; */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+
+    /* md breakpoint */
+    body {
+        padding: 0.75rem;
+        /* Smaller padding on mobile */
+        /* Flex direction change handled by Tailwind */
+    }
+
+    .container {
+        padding: 1rem;
+    }
+
+    /* Adjust grid for smaller screens */
+    .grid-container {
+        /* Allow grid to shrink, but set a min width for cells */
+        grid-template-columns: repeat(12, minmax(30px, 1fr));
+        gap: 1px;
+        /* Smaller gap */
+    }
+
+    .grid-cell {
+        width: auto;
+        /* Let grid handle width */
+        height: auto;
+        aspect-ratio: 1 / 1;
+        /* Maintain square shape */
+        font-size: 0.75rem;
+        /* Smaller font */
+        border-radius: 3px;
+    }
+
+    /* Adjust buttons for smaller screens */
+    button {
+        padding: 8px 12px;
+        /* Smaller padding */
+        min-width: auto;
+        /* Allow flexible width */
+        font-size: 0.8rem;
+        /* Smaller font size */
+    }
+
+    /* Make session buttons stack nicely */
+    .session-manager-container .flex.gap-2 {
+        flex-direction: column;
+        /* Stack load/delete buttons */
+    }
+
+    .session-manager-container .flex.gap-2 button {
+        width: 100%;
+        /* Make stacked buttons full width */
+    }
+
+    .controls {
+        gap: 0.5rem;
+        /* Smaller gap between main control buttons */
+    }
+
+    .chart-container {
+        height: 250px;
+        /* Reduce chart height */
+    }
+
+    h1 {
+        font-size: 1.25rem;
+    }
+
+    /* Adjust heading sizes */
+    h2 {
+        font-size: 1.1rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    .prediction-area {
+        font-size: 1rem;
+        padding: 10px;
+        min-height: 44px;
+    }
+
+    input[type="text"], select {
+        font-size: 0.9rem;
+        /* Adjust form element font size */
+    }
+}

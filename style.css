@@ -1,0 +1,664 @@
+/* Default Light Theme Variables are defined in <style> tag in HTML */
+/* Dark Theme Variables are defined in <style> tag in HTML under body.dark */
+
+/* Apply Variables (Styles moved to <style> tag in HTML for better organization with variables) */
+
+/* --- Specific Component Styles (Keep these here) --- */
+:root {
+    --bg-body: #f3f4f6;
+    /* gray-100 */
+    --bg-container: white;
+    --bg-grid-wrapper: #f9fafb;
+    /* gray-50 */
+    --bg-prediction: #e9ecef;
+    /* Light gray */
+    --text-primary: #1f2937;
+    /* gray-800 */
+    --text-secondary: #4b5563;
+    /* gray-600 */
+    --text-muted: #6b7280;
+    /* gray-500 */
+    --text-button: white;
+    --text-heading: #111827;
+    /* gray-900 */
+    --text-label: #374151;
+    /* gray-700 */
+    --text-stat-win: #15803d;
+    /* green-700 */
+    --text-stat-loss: #b91c1c;
+    /* red-700 */
+    --text-stat-win-value: #16a34a;
+    /* green-600 */
+    --text-stat-loss-value: #dc2626;
+    /* red-600 */
+    --border-color: #d1d5db;
+    /* gray-300 */
+    --border-grid: #e5e7eb;
+    /* gray-200 */
+    --border-prediction: #ced4da;
+    --input-bg: white;
+    --input-border: #d1d5db;
+    /* gray-300 */
+    --input-focus-border: #4f46e5;
+    /* indigo-600 */
+    --input-focus-shadow: rgba(79, 70, 229, 0.3);
+    --select-arrow: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    --chart-grid-color: rgba(0, 0, 0, 0.1);
+    --chart-label-color: #4b5563;
+    /* gray-600 */
+    --chart-line-color: #ef4444;
+    /* red-500 */
+    --chart-fill-color: rgba(239, 68, 68, 0.3);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --shadow-color-md: rgba(0, 0, 0, 0.1);
+    --shadow-color-inner: rgba(0, 0, 0, 0.06);
+}
+
+/* Dark Theme Variables */
+body.dark {
+    --bg-body: #1f2937;
+    /* gray-800 */
+    --bg-container: #374151;
+    /* gray-700 */
+    --bg-grid-wrapper: #4b5563;
+    /* gray-600 */
+    --bg-prediction: #4b5563;
+    /* gray-600 */
+    --text-primary: #f3f4f6;
+    /* gray-100 */
+    --text-secondary: #d1d5db;
+    /* gray-300 */
+    --text-muted: #9ca3af;
+    /* gray-400 */
+    --text-button: white;
+    /* Keep button text white generally */
+    --text-heading: #f9fafb;
+    /* gray-50 */
+    --text-label: #d1d5db;
+    /* gray-300 */
+    --text-stat-win: #6ee7b7;
+    /* green-300 */
+    --text-stat-loss: #fda4af;
+    /* red-300 */
+    --text-stat-win-value: #86efac;
+    /* green-400 */
+    --text-stat-loss-value: #fca5a5;
+    /* red-400 */
+    --border-color: #4b5563;
+    /* gray-600 */
+    --border-grid: #6b7280;
+    /* gray-500 */
+    --border-prediction: #6b7280;
+    /* gray-500 */
+    --input-bg: #4b5563;
+    /* gray-600 */
+    --input-border: #6b7280;
+    /* gray-500 */
+    --input-focus-border: #818cf8;
+    /* indigo-400 */
+    --input-focus-shadow: rgba(129, 140, 248, 0.3);
+    --select-arrow: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    /* Lighter arrow */
+    --chart-grid-color: rgba(255, 255, 255, 0.15);
+    --chart-label-color: #d1d5db;
+    /* gray-300 */
+    --chart-line-color: #fca5a5;
+    /* red-300 */
+    --chart-fill-color: rgba(252, 165, 165, 0.3);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    /* Darker shadow */
+    --shadow-color-md: rgba(0, 0, 0, 0.4);
+    --shadow-color-inner: rgba(0, 0, 0, 0.2);
+}
+
+/* Apply Variables */
+body {
+    font-family: 'Sarabun', sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    background-color: var(--bg-container);
+    color: var(--text-primary);
+    border-radius: 0.75rem;
+    /* 12px */
+    box-shadow: 0 4px 6px -1px var(--shadow-color-md), 0 2px 4px -1px var(--shadow-color);
+    width: 100%;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+label {
+    color: var(--text-label);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    color: var(--text-heading);
+    font-family: 'Sarabun', sans-serif;
+}
+
+p {
+    color: var(--text-primary);
+    font-family: 'Sarabun', sans-serif;
+}
+
+.text-gray-500 {
+    color: var(--text-muted);
+}
+
+.text-gray-600 {
+    color: var(--text-secondary);
+}
+
+.text-gray-700 {
+    color: var(--text-label);
+}
+
+/* Re-map */
+.text-green-700 {
+    color: var(--text-stat-win);
+}
+
+.text-red-700 {
+    color: var(--text-stat-loss);
+}
+
+.text-green-600 {
+    color: var(--text-stat-win-value);
+}
+
+.text-red-600 {
+    color: var(--text-stat-loss-value);
+}
+
+.border-t {
+    border-top-color: var(--border-color);
+}
+
+hr {
+    border-top-color: var(--border-color);
+}
+
+.grid-wrapper {
+    background-color: var(--bg-grid-wrapper);
+    border: 1px solid var(--border-grid);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.grid-cell {
+    border: 1px solid var(--border-grid);
+    /* Keep text color white for B/P/T cells, background is set by class */
+}
+
+.prediction-area {
+    background-color: var(--bg-prediction);
+    color: var(--text-primary);
+    /* Adjust text color for prediction area */
+    border: 1px solid var(--border-prediction);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    font-family: 'Sarabun', sans-serif;
+}
+
+.prediction-area .text-red-600 {
+    color: var(--text-stat-loss-value);
+}
+
+/* Adjust prediction text color */
+.prediction-area .text-blue-600 {
+    color: #93c5fd;
+}
+
+/* Adjust prediction text color (light blue for dark) */
+body.dark .prediction-area .text-blue-600 {
+    color: #60a5fa;
+}
+
+/* Blue-400 */
+
+
+input[type="text"],
+select {
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--input-border);
+    border-radius: 0.375rem;
+    box-shadow: inset 0 1px 2px 0 var(--shadow-color-inner);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    font-family: 'Sarabun', sans-serif;
+}
+
+input[type="text"]:focus,
+select:focus {
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 0 2px var(--input-focus-shadow);
+}
+
+select {
+    background-image: var(--select-arrow);
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* Button text color (already white, generally okay) */
+button {
+    color: var(--text-button);
+    font-family: 'Sarabun', sans-serif;
+    box-shadow: 0 1px 3px 0 var(--shadow-color), 0 1px 2px 0 var(--shadow-color-inner);
+}
+
+button:active {
+    box-shadow: inset 0 2px 4px 0 var(--shadow-color-inner);
+}
+
+/* Theme Toggle Button Style */
+#theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background-color: var(--bg-container);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 10%;
+    width: 20px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.1s ease;
+    z-index: 50;
+    /* Ensure it's above other content */
+}
+
+#theme-toggle:hover {
+    opacity: 0.9;
+}
+
+#theme-toggle:active {
+    transform: scale(0.95);
+}
+
+#theme-toggle i {
+    /* Style for Font Awesome icon */
+    font-size: 1.2rem;
+}
+
+/* Grid Cells */
+.grid-cell {
+    width: 35px;
+    height: 35px;
+    border: 1px solid var(--border-grid);
+    /* Use variable */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* Background colors are specific to the result, not theme */
+    /* color: black; */
+}
+
+.banker {
+    background-color: #ef4444;
+    color: white;
+}
+
+/* Red-500 */
+.player {
+    background-color: #3b82f6;
+    color: white;
+}
+
+/* Blue-500 */
+.tie {
+    background-color: #22c55e;
+    color: rgb(167, 166, 166);
+}
+
+/* Green-500 */
+
+/* General Button Styling */
+button {
+    padding: 10px 15px;
+    color: var(--text-button);
+    /* Use variable */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease, box-shadow 0.3s ease;
+    margin: 0;
+    min-width: 100px;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    border: none;
+    line-height: 1.5;
+    font-family: 'Sarabun', sans-serif;
+    box-shadow: 0 1px 3px 0 var(--shadow-color), 0 1px 2px 0 var(--shadow-color-inner);
+    /* Use variables */
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button:active {
+    transform: scale(0.98);
+    box-shadow: inset 0 2px 4px 0 var(--shadow-color-inner);
+    /* Use variable */
+}
+
+/* Specific Button Colors (Backgrounds remain specific) */
+.btn-banker {
+    background-color: #dc2626;
+    padding: 10px;
+    color: white;
+}
+
+.btn-banker:hover {
+    background-color: #b91c1c;
+    padding: 10px;
+    color: white;
+}
+
+.btn-player {
+    background-color: #2563eb;
+    padding: 10px;
+    color: white;
+}
+
+.btn-player:hover {
+    background-color: #1d4ed8;
+    padding: 10px;
+    color: white;
+}
+
+.btn-tie {
+    background-color: #16a34a;
+    padding: 10px;
+    color: white;
+}
+
+.btn-tie:hover {
+    background-color: #15803d;
+    padding: 10px;
+    color: white;
+}
+
+.btn-undo {
+    background-color: #f97316;
+    padding: 10px;
+    color: white;
+}
+
+.btn-undo:hover {
+    background-color: #ea580c;
+    padding: 10px;
+    color: white;
+}
+
+.btn-reset-normal {
+    background-color: #6b7280;
+    padding: 10px;
+    color: white;
+}
+
+/* Gray-500 */
+.btn-reset-normal:hover {
+    background-color: #4b5563;
+    padding: 10px;
+    color: white;
+}
+
+/* Gray-600 */
+.btn-reset-save {
+    background-color: #ca8a04;
+    padding: 10px;
+    color: white;
+}
+
+.btn-reset-save:hover {
+    background-color: #a16207;
+    padding: 10px;
+    color: white;
+}
+
+.btn-save-session {
+    background-color: #9333ea;
+    padding: 10px;
+    color: white;
+}
+
+.btn-save-session:hover {
+    background-color: #7e22ce;
+    padding: 10px;
+    color: white;
+}
+
+.btn-load-session {
+    background-color: #0ea5e9;
+    padding: 10px;
+    color: white;
+}
+
+.btn-load-session:hover {
+    background-color: #0284c7;
+    padding: 10px;
+    color: white;
+}
+
+.btn-delete-session {
+    background-color: #e11d48;
+    padding: 10px;
+    color: white;
+}
+
+.btn-delete-session:hover {
+    background-color: #be123c;
+    padding: 10px;
+    color: white;
+}
+
+.btn-new-session {
+    background-color: #64748b;
+    padding: 10px;
+    color: white;
+}
+
+/* Slate-500 */
+.btn-new-session:hover {
+    background-color: #475569;
+    padding: 10px;
+    color: white;
+}
+
+/* Slate-600 */
+
+/* Submit Sequence Button (Tailwind used mostly in HTML, but ensure contrast) */
+#btn-submit-sequence {
+    min-width: auto;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    /* Ensure text is readable on indigo background */
+    color: white;
+}
+
+/* Layout & Containers */
+body {
+    /* Variables applied in HTML <style> */
+    padding: 1rem;
+    min-height: 100vh;
+}
+
+.sidebar {
+    flex-shrink: 0;
+}
+
+.main-content {
+    flex-grow: 1;
+}
+
+.container {
+    /* Variables applied in HTML <style> */
+    padding: 1.5rem;
+}
+
+.text-input-container,
+.summary-stats-container,
+.session-manager-container {
+    padding: 1.25rem;
+}
+
+/* Grid Wrapper */
+.grid-wrapper {
+    /* Variables applied in HTML <style> */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    border-radius: 0.375rem;
+}
+
+.grid-container {
+    display: inline-grid;
+    grid-template-columns: repeat(12, 35px);
+    gap: 2px;
+    padding: 5px;
+}
+
+/* Controls */
+.controls {
+    /* Tailwind used */
+}
+
+/* Prediction Area */
+.prediction-area {
+    /* Variables applied in HTML <style> */
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 12px;
+    border-radius: 8px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Chart Container */
+.chart-container {
+    width: 100%;
+    height: 300px;
+    position: relative;
+}
+
+/* Input and Select */
+input[type="text"], select {
+    /* Variables applied in HTML <style> */
+    padding: 0.6rem 0.75rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+select {
+    cursor: pointer;
+}
+
+/* Theme Toggle Button */
+#theme-toggle {
+    /* Variables applied in HTML <style> */
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    body {
+        padding: 0.75rem;
+    }
+
+    .container {
+        padding: 1rem;
+    }
+
+    .grid-container {
+        grid-template-columns: repeat(12, minmax(30px, 1fr));
+        gap: 1px;
+    }
+
+    .grid-cell {
+        width: auto;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        font-size: 0.75rem;
+        border-radius: 3px;
+    }
+
+    button {
+        padding: 8px 12px;
+        min-width: auto;
+        font-size: 0.8rem;
+    }
+
+    .session-manager-container .flex.gap-2 {
+        flex-direction: column;
+    }
+
+    .session-manager-container .flex.gap-2 button {
+        width: 100%;
+    }
+
+    .controls {
+        gap: 0.5rem;
+    }
+
+    .chart-container {
+        height: 250px;
+    }
+
+    h1 {
+        font-size: 1.25rem;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    .prediction-area {
+        font-size: 1rem;
+        padding: 10px;
+        min-height: 44px;
+    }
+
+    input[type="text"], select {
+        font-size: 0.9rem;
+    }
+
+    #theme-toggle {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 36px;
+        height: 36px;
+    }
+
+    #theme-toggle i {
+        font-size: 1rem;
+    }
+}

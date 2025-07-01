@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>สูตรบาคาร่า (พร้อม Session & Theme)</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Sarabun:wght@400;700&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body class="flex flex-col md:flex-row p-4 gap-6 bg-gray-100">
+
+    <button id="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-sun"></i> </button>
+
+    <div class="sidebar flex flex-col gap-6 md:w-1/4">
+        <div class="container text-input-container shadow-md">
+            <label for="text-input-sequence" class="block text-sm font-medium mb-1">
+                ป้อนลำดับผลลัพธ์ (เช่น BPBTBP):
+            </label>
+            <div class="flex space-x-2">
+                <input type="text" id="text-input-sequence" name="text-input-sequence" placeholder="BPBTBP..."
+                    class="flex-grow p-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm font-[Inter]">
+                <button id="btn-submit-sequence"
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-md">
+                    เพิ่ม
+                </button>
+            </div>
+            <p id="text-input-status" class="text-xs mt-1 h-4"></p>
+        </div>
+
+        <div class="container session-manager-container shadow-md">
+            <h3 class="text-lg font-semibold text-center mb-3">
+                จัดการ (ห้องสูตร)
+            </h3>
+            <div class="space-y-3">
+                <div>
+                    <label for="session-name" class="block text-sm font-medium mb-1">
+                        ชื่อ ห้อง:
+                    </label>
+                    <input type="text" id="session-name" name="session-name" placeholder="เช่น ห้อง 1, โต๊ะ VIP"
+                        class="w-full p-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <p id="session-status" class="text-xs mt-1 h-4"></p>
+                </div>
+                <button id="btn-save-session" class="btn-save-session w-full">
+                    บันทึก ห้อง ปัจจุบัน
+                </button>
+                <hr class="my-3">
+                <div>
+                    <label for="saved-sessions" class="block text-sm font-medium mb-1">
+                        โหลด / ลบ ห้อง:
+                    </label>
+                    <select id="saved-sessions" name="saved-sessions"
+                        class="w-full p-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option value="">-- เลือก ห้อง --</option>
+                    </select>
+                </div>
+                <div class="flex gap-2 mt-2">
+                    <button id="btn-load-session" class="btn-load-session flex-1">โหลด</button>
+                    <button id="btn-delete-session" class="btn-delete-session flex-1">ลบ</button>
+                </div>
+                <button id="btn-new-session" class="btn-new-session w-full mt-2">
+                    สร้าง ห้อง ใหม่ (ล้างปัจจุบัน)
+                </button>
+            </div>
+        </div>
+
+        <div class="container summary-stats-container shadow-md">
+            <h3 class="text-lg font-semibold text-center mb-3">
+                จำนวนรอบในการเล่น
+            </h3>
+            <p class="text-xs text-center mb-2">ห้อง: <span id="current-session-name"
+                    class="font-medium">Default</span></p>
+            <div class="space-y-3 text-sm">
+                <p>จำนวนรอบทั้งหมด : <span id="stat-total-predictions" class="font-medium">0</span> <span
+                        id="stat-last-outcome" class="text-xs ml-1"></span></p>
+                <div class="border-t pt-2">
+                    <h4 class="font-medium mb-1"> ชนะติดต่อกัน:
+                        <span class="text-xs font-normal">| ชนะรวม <span id="stat-total-wins"
+                                class="font-medium">0</span> รอบ</span>
+                    </h4>
+                    <div id="win-streak-stats" class="space-y-1 pl-2">
+                        <p class="text-xs">ยังไม่มีข้อมูล</p>
+                    </div>
+                </div>
+                <div class="border-t pt-2">
+                    <h4 class="font-medium mb-1"> แพ้ติดต่อกัน:
+                        <span class="text-xs font-normal">| แพ้รวม <span id="stat-total-losses"
+                                class="font-medium">0</span> รอบ</span>
+                    </h4>
+                    <div id="loss-streak-stats" class="space-y-1 pl-2">
+                        <p class="text-xs">ยังไม่มีข้อมูล</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content flex flex-col gap-6 md:w-3/4">
+        <div class="container shadow-md">
+            <h1 class="text-2xl font-bold text-center mb-5">
+                ตารางสูตรบาคาร่า
+            </h1>
+            <div class="grid-wrapper">
+                <div id="baccarat-grid" class="grid-container"></div>
+            </div>
+            <div class="controls flex justify-center flex-wrap gap-3 mt-4">
+                <button id="btn-banker" class="btn-banker"> B </button>
+                <button id="btn-player" class="btn-player"> P </button>
+                <button id="btn-tie" class="btn-tie"> T </button>
+                <button id="btn-undo" class="btn-undo"> Back </button>
+                <button id="btn-clear-current" class="btn-reset-normal"> Clear </button>
+                <button id="btn-save-log-clear" class="btn-reset-save"> Save Log & Clear </button>
+            </div>
+            <div id="prediction-output" class="prediction-area mt-4"> ผลคาดเดา: - </div>
+        </div>
+
+        <div class="container shadow-md">
+            <h2 class="text-xl font-bold text-center mb-4">กราฟคะแนนสูตร</h2>
+            <div class="chart-container">
+                <canvas id="winChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
