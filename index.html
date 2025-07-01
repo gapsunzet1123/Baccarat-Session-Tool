@@ -38,28 +38,28 @@
 
         <div class="container session-manager-container shadow-md">
             <h3 class="text-lg font-semibold text-center mb-3">
-                จัดการ Session (ห้องสูตร)
+                จัดการ (ห้องสูตร)
             </h3>
             <div class="space-y-3">
                 <div>
                     <label for="session-name" class="block text-sm font-medium mb-1">
-                        ชื่อ Session:
+                        ชื่อ ห้อง:
                     </label>
                     <input type="text" id="session-name" name="session-name" placeholder="เช่น ห้อง 1, โต๊ะ VIP"
                         class="w-full p-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     <p id="session-status" class="text-xs mt-1 h-4"></p>
                 </div>
                 <button id="btn-save-session" class="btn-save-session w-full">
-                    บันทึก Session ปัจจุบัน
+                    บันทึก ห้อง ปัจจุบัน
                 </button>
                 <hr class="my-3">
                 <div>
                     <label for="saved-sessions" class="block text-sm font-medium mb-1">
-                        โหลด / ลบ Session:
+                        โหลด / ลบ ห้อง:
                     </label>
                     <select id="saved-sessions" name="saved-sessions"
                         class="w-full p-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        <option value="">-- เลือก Session --</option>
+                        <option value="">-- เลือก ห้อง --</option>
                     </select>
                 </div>
                 <div class="flex gap-2 mt-2">
@@ -67,22 +67,22 @@
                     <button id="btn-delete-session" class="btn-delete-session flex-1">ลบ</button>
                 </div>
                 <button id="btn-new-session" class="btn-new-session w-full mt-2">
-                    สร้าง Session ใหม่ (ล้างปัจจุบัน)
+                    สร้าง ห้อง ใหม่ (ล้างปัจจุบัน)
                 </button>
             </div>
         </div>
 
         <div class="container summary-stats-container shadow-md">
             <h3 class="text-lg font-semibold text-center mb-3">
-                สถิติการทำนาย
+                จำนวนรอบในการเล่น
             </h3>
-            <p class="text-xs text-center mb-2">Session: <span id="current-session-name"
+            <p class="text-xs text-center mb-2">ห้อง: <span id="current-session-name"
                     class="font-medium">Default</span></p>
             <div class="space-y-3 text-sm">
-                <p>รอบการทำนายทั้งหมด: <span id="stat-total-predictions" class="font-medium">0</span> <span
+                <p>จำนวนรอบทั้งหมด : <span id="stat-total-predictions" class="font-medium">0</span> <span
                         id="stat-last-outcome" class="text-xs ml-1"></span></p>
                 <div class="border-t pt-2">
-                    <h4 class="font-medium mb-1"> สถิติชนะติดต่อกัน:
+                    <h4 class="font-medium mb-1"> ชนะติดต่อกัน:
                         <span class="text-xs font-normal">| ชนะรวม <span id="stat-total-wins"
                                 class="font-medium">0</span> รอบ</span>
                     </h4>
@@ -91,7 +91,7 @@
                     </div>
                 </div>
                 <div class="border-t pt-2">
-                    <h4 class="font-medium mb-1"> สถิติแพ้ติดต่อกัน:
+                    <h4 class="font-medium mb-1"> แพ้ติดต่อกัน:
                         <span class="text-xs font-normal">| แพ้รวม <span id="stat-total-losses"
                                 class="font-medium">0</span> รอบ</span>
                     </h4>
@@ -112,12 +112,12 @@
                 <div id="baccarat-grid" class="grid-container"></div>
             </div>
             <div class="controls flex justify-center flex-wrap gap-3 mt-4">
-                <button id="btn-banker" class="btn-banker">เจ้ามือ (Banker)</button>
-                <button id="btn-player" class="btn-player">ผู้เล่น (Player)</button>
-                <button id="btn-tie" class="btn-tie">เสมอ (Tie)</button>
-                <button id="btn-undo" class="btn-undo">ถอยกลับ</button>
-                <button id="btn-clear-current" class="btn-reset-normal">ล้าง Session ปัจจุบัน</button>
-                <button id="btn-save-log-clear" class="btn-reset-save">บันทึก Log & ล้าง</button>
+                <button id="btn-banker" class="btn-banker"> B </button>
+                <button id="btn-player" class="btn-player"> P </button>
+                <button id="btn-tie" class="btn-tie"> T </button>
+                <button id="btn-undo" class="btn-undo"> Back </button>
+                <button id="btn-clear-current" class="btn-reset-normal"> Clear </button>
+                <button id="btn-save-log-clear" class="btn-reset-save"> Save Log & Clear </button>
             </div>
             <div id="prediction-output" class="prediction-area mt-4"> ผลคาดเดา: - </div>
         </div>

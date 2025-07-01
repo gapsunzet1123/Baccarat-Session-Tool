@@ -39,7 +39,7 @@ const currentSessionNameSpan = document.getElementById("current-session-name");
 
 // Theme Toggle Element
 const themeToggleButton = document.getElementById("theme-toggle");
-const themeToggleIcon = themeToggleButton.querySelector('i'); // Get the icon element
+const themeToggleIcon = themeToggleButton.querySelector('i');
 
 // --- ตัวแปรสถานะของแอปพลิเคชัน ---
 let activeSessionName = "Default";
@@ -52,7 +52,7 @@ let chartInstance = null;
 let isProcessingTextInput = false;
 
 // Prediction and Score State
-let predictionScore = 0;
+let predictionScore = 1;
 let consecutiveLosses = 0;
 let lastPrediction = '-';
 let predictionAttemptNumber = 0;
@@ -85,7 +85,6 @@ const predictionPatterns = {
 
 // --- Theme Functions ---
 
-// Applies the specified theme ('light' or 'dark')
 function applyTheme(theme) {
     if (theme === 'dark') {
         document.body.classList.add('dark');
@@ -98,19 +97,15 @@ function applyTheme(theme) {
         themeToggleIcon.classList.add('fa-sun');
         themeToggleButton.setAttribute('aria-label', 'Switch to dark theme');
     }
-    // Update chart theme after applying body class
-    updateChartTheme(theme);
+    updateChartTheme();
 }
 
-// Toggles between light and dark themes
 function toggleTheme() {
-    const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    localStorage.setItem(THEME_STORAGE_KEY, newTheme); // Save preference
+    const newTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
+    localStorage.setItem(THEME_STORAGE_KEY, newTheme);
     applyTheme(newTheme);
 }
 
-// Loads the saved theme from localStorage or defaults to 'light'
 function loadTheme() {
     const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || 'light';
     applyTheme(savedTheme);
@@ -118,19 +113,14 @@ function loadTheme() {
 
 // --- Chart Functions ---
 
-// Updates chart colors based on the current theme
-function updateChartTheme(theme) {
-    if (!chartInstance) return; // Exit if chart not initialized
+function updateChartTheme() {
+    if (!chartInstance) return;
 
-    const isDark = theme === 'dark';
-
-    // Get colors from CSS variables (ensure these are defined in the :root and body.dark styles)
     const gridColor = getComputedStyle(document.body).getPropertyValue('--chart-grid-color').trim();
     const labelColor = getComputedStyle(document.body).getPropertyValue('--chart-label-color').trim();
     const lineColor = getComputedStyle(document.body).getPropertyValue('--chart-line-color').trim();
     const fillColor = getComputedStyle(document.body).getPropertyValue('--chart-fill-color').trim();
 
-    // Update chart options
     chartInstance.options.scales.x.grid.color = gridColor;
     chartInstance.options.scales.y.grid.color = gridColor;
     chartInstance.options.scales.x.ticks.color = labelColor;
@@ -139,28 +129,22 @@ function updateChartTheme(theme) {
     chartInstance.options.scales.y.title.color = labelColor;
     chartInstance.options.plugins.legend.labels.color = labelColor;
 
-    // Update dataset colors
     chartInstance.data.datasets[0].borderColor = lineColor;
     chartInstance.data.datasets[0].backgroundColor = fillColor;
 
-    chartInstance.update(); // Redraw the chart with new colors
+    chartInstance.update();
 }
 
-
-// Initializes or resets the Chart.js instance
 function initializeChart() {
     if (chartInstance) {
         chartInstance.destroy();
     }
     const ctx = chartCanvas.getContext("2d");
 
-    // Determine initial theme for chart colors
-    const initialTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
-    const initialGridColor = getComputedStyle(document.body).getPropertyValue('--chart-grid-color').trim();
     const initialLabelColor = getComputedStyle(document.body).getPropertyValue('--chart-label-color').trim();
+    const initialGridColor = getComputedStyle(document.body).getPropertyValue('--chart-grid-color').trim();
     const initialLineColor = getComputedStyle(document.body).getPropertyValue('--chart-line-color').trim();
     const initialFillColor = getComputedStyle(document.body).getPropertyValue('--chart-fill-color').trim();
-
 
     chartInstance = new Chart(ctx, {
         type: "line",
@@ -169,8 +153,8 @@ function initializeChart() {
             datasets: [{
                 label: "คะแนนสูตร",
                 data: [],
-                borderColor: initialLineColor, // Use initial theme color
-                backgroundColor: initialFillColor, // Use initial theme color
+                borderColor: initialLineColor,
+                backgroundColor: initialFillColor,
                 fill: true,
                 tension: 0.1,
             }],
@@ -181,19 +165,19 @@ function initializeChart() {
             animation: { duration: 0 },
             scales: {
                 x: {
-                    title: { display: true, text: "รอบการทำนาย", font: { family: "'Sarabun', sans-serif" }, color: initialLabelColor }, // Use initial theme color
-                    ticks: { stepSize: 1, color: initialLabelColor }, // Use initial theme color
-                    grid: { display: true, color: initialGridColor }, // Use initial theme color
+                    title: { display: true, text: "รอบการทำนาย", font: { family: "'Sarabun', sans-serif" }, color: initialLabelColor },
+                    ticks: { stepSize: 1, color: initialLabelColor },
+                    grid: { display: true, color: initialGridColor },
                     min: 1
                 },
                 y: {
-                    title: { display: true, text: "คะแนน", font: { family: "'Sarabun', sans-serif" }, color: initialLabelColor }, // Use initial theme color
-                    ticks: { stepSize: 1, color: initialLabelColor }, // Use initial theme color
-                    grid: { display: true, color: initialGridColor } // Use initial theme color
+                    title: { display: true, text: "คะแนน", font: { family: "'Sarabun', sans-serif" }, color: initialLabelColor },
+                    ticks: { stepSize: 1, color: initialLabelColor },
+                    grid: { display: true, color: initialGridColor }
                 },
             },
             plugins: {
-                legend: { labels: { font: { family: "'Sarabun', sans-serif" }, color: initialLabelColor } } // Use initial theme color
+                legend: { labels: { font: { family: "'Sarabun', sans-serif" }, color: initialLabelColor } }
             },
             interaction: {
                 intersect: false,
@@ -260,9 +244,7 @@ function rebuildChartFromHistory() {
     const data = [...scoreHistory];
     chartInstance.data.labels = labels;
     chartInstance.data.datasets[0].data = data;
-    // Ensure chart theme is up-to-date when rebuilding
-    const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
-    updateChartTheme(currentTheme); // This will call chartInstance.update()
+    updateChartTheme();
 }
 
 // --- Summary Stats Update ---
@@ -272,19 +254,17 @@ function updateSummaryStats() {
     statTotalLosses.textContent = totalPredictionLosses;
     currentSessionNameSpan.textContent = activeSessionName;
 
-    // Update last outcome indicator (using CSS variables implicitly via classes)
     if (lastPredictionOutcome === 'win') {
         statLastOutcome.textContent = '(ชนะ)';
-        statLastOutcome.className = 'text-xs ml-1 text-green-600'; // Class maps to CSS var
+        statLastOutcome.className = 'text-xs ml-1 text-green-600';
     } else if (lastPredictionOutcome === 'loss') {
         statLastOutcome.textContent = '(แพ้)';
-        statLastOutcome.className = 'text-xs ml-1 text-red-600'; // Class maps to CSS var
+        statLastOutcome.className = 'text-xs ml-1 text-red-600';
     } else {
         statLastOutcome.textContent = '';
         statLastOutcome.className = 'text-xs ml-1';
     }
 
-    // Update win streak stats
     winStreakStatsDiv.innerHTML = '';
     let hasWinStreaks = false;
     const sortedWinKeys = Object.keys(winStreakCounts).map(Number).sort((a, b) => a - b);
@@ -294,22 +274,21 @@ function updateSummaryStats() {
             hasWinStreaks = true;
             const p = document.createElement('p');
             p.className = 'text-xs';
-            p.innerHTML = `ชนะติดต่อ ${streakLength} ครั้ง : <span class="font-medium text-green-600">${count}</span> รอบ`; // Classes map to CSS vars
+            p.innerHTML = `ชนะติดต่อ ${streakLength} ครั้ง : <span class="font-medium text-green-600">${count}</span> รอบ`;
             winStreakStatsDiv.appendChild(p);
         }
     });
     if (consecutiveWins > 0) {
         hasWinStreaks = true;
         const p = document.createElement('p');
-        p.className = 'text-xs text-gray-500 italic'; // Class maps to CSS var
+        p.className = 'text-xs text-gray-500 italic';
         p.innerHTML = `<i>(กำลังชนะติดต่อ ${consecutiveWins} ครั้ง)</i>`;
         winStreakStatsDiv.appendChild(p);
     }
     if (!hasWinStreaks) {
-        winStreakStatsDiv.innerHTML = '<p class="text-xs text-gray-500">ยังไม่มีข้อมูล</p>'; // Class maps to CSS var
+        winStreakStatsDiv.innerHTML = '<p class="text-xs text-gray-500">ยังไม่มีข้อมูล</p>';
     }
 
-    // Update loss streak stats
     lossStreakStatsDiv.innerHTML = '';
     let hasLossStreaks = false;
     const sortedLossKeys = Object.keys(lossStreakCounts).map(Number).sort((a, b) => a - b);
@@ -319,19 +298,19 @@ function updateSummaryStats() {
             hasLossStreaks = true;
             const p = document.createElement('p');
             p.className = 'text-xs';
-            p.innerHTML = `แพ้ติดต่อ ${streakLength} ครั้ง : <span class="font-medium text-red-600">${count}</span> รอบ`; // Classes map to CSS vars
+            p.innerHTML = `แพ้ติดต่อ ${streakLength} ครั้ง : <span class="font-medium text-red-600">${count}</span> รอบ`;
             lossStreakStatsDiv.appendChild(p);
         }
     });
     if (consecutiveLosses > 0) {
         hasLossStreaks = true;
         const p = document.createElement('p');
-        p.className = 'text-xs text-gray-500 italic'; // Class maps to CSS var
+        p.className = 'text-xs text-gray-500 italic';
         p.innerHTML = `<i>(กำลังแพ้ติดต่อ ${consecutiveLosses} ครั้ง)</i>`;
         lossStreakStatsDiv.appendChild(p);
     }
     if (!hasLossStreaks) {
-        lossStreakStatsDiv.innerHTML = '<p class="text-xs text-gray-500">ยังไม่มีข้อมูล</p>'; // Class maps to CSS var
+        lossStreakStatsDiv.innerHTML = '<p class="text-xs text-gray-500">ยังไม่มีข้อมูล</p>';
     }
 }
 
@@ -347,11 +326,9 @@ function predictNext() {
 
 function displayPrediction(prediction) {
     let predictionText = "-";
-    // Use classes that map to CSS variables for colors
     if (prediction === "B") {
         predictionText = '<span class="text-red-600">เจ้ามือ (Banker)</span>';
     } else if (prediction === "P") {
-        // Use a generic blue class, let CSS variables handle theme
         predictionText = '<span class="text-blue-600">ผู้เล่น (Player)</span>';
     }
     predictionOutput.innerHTML = `ผลคาดเดา: ${predictionText}`;
@@ -429,7 +406,7 @@ function handleResult(actualResult) {
     }
 
     if (predictionAttemptedThisRound) {
-        rebuildChartFromHistory(); // Will update chart and its theme
+        rebuildChartFromHistory();
     }
 
     updateSummaryStats();
@@ -455,19 +432,29 @@ function handleUndo() {
     rounds--;
     if (undoneResult === 'T') tieWins--;
 
+    // Recalculate the position of the cell to clear and set the new cursor position
     let previousRow, previousCol;
     if (currentFillRow === 0) {
-        if (currentFillCol > 0) { previousCol = currentFillCol - 1; previousRow = GRID_ROWS - 1; }
-        else { previousCol = 0; previousRow = 0; }
-    } else { previousCol = currentFillCol; previousRow = currentFillRow - 1; }
+        if (currentFillCol > 0) {
+            previousCol = currentFillCol - 1;
+            previousRow = GRID_ROWS - 1;
+        } else {
+            // This case should ideally not be hit if results.length > 0
+            previousCol = 0;
+            previousRow = 0;
+        }
+    } else {
+        previousCol = currentFillCol;
+        previousRow = currentFillRow - 1;
+    }
 
     currentFillRow = previousRow;
     currentFillCol = previousCol;
 
-    if (results.length > 0 || (previousRow === 0 && previousCol === 0)) {
-        drawCell(currentFillRow, currentFillCol, null);
-    }
+    // Clear the cell at the new cursor position (which was the last filled cell)
+    drawCell(currentFillRow, currentFillCol, null);
 
+    // Check if the undone action corresponds to a prediction attempt
     let needsHistoryPop = false;
     if (predictionAttemptHistory.length > 0 &&
         predictionAttemptHistory[predictionAttemptHistory.length - 1] === predictionAttemptNumber) {
@@ -482,6 +469,7 @@ function handleUndo() {
         lastPredictionOutcomeHistory.pop(); totalWinsHistory.pop(); totalLossesHistory.pop();
 
         if (scoreHistory.length > 0) {
+            // Restore state from the previous point in history
             predictionScore = scoreHistory[scoreHistory.length - 1];
             winStreakCounts = { ...(winStreakCountsHistory[winStreakCountsHistory.length - 1] || {}) };
             lossStreakCounts = { ...(lossStreakCountsHistory[lossStreakCountsHistory.length - 1] || {}) };
@@ -492,26 +480,44 @@ function handleUndo() {
             totalPredictionWins = totalWinsHistory[totalWinsHistory.length - 1];
             totalPredictionLosses = totalLossesHistory[totalLossesHistory.length - 1];
         } else {
-            clearAppState(false); // Reset state, keep session name
+            // ***** BUG FIX START *****
+            // This is the fix: Instead of calling clearAppState(), which resets the grid cursor,
+            // we only reset the prediction-related variables to their initial state.
+            // The grid cursor (currentFillRow, currentFillCol) remains untouched.
+            predictionScore = 1;
+            consecutiveLosses = 0;
+            consecutiveWins = 0;
+            lastPrediction = '-';
+            predictionAttemptNumber = 0;
+            lastPredictionOutcome = null;
+            totalPredictionWins = 0;
+            totalPredictionLosses = 0;
+            winStreakCounts = {};
+            lossStreakCounts = {};
+            // History arrays are already empty from being popped.
+            // ***** BUG FIX END *****
         }
     } else {
+        // If no prediction history was popped, just update the last prediction outcome
         if (lastPredictionHistory.length > 0) {
             lastPrediction = lastPredictionHistory[lastPredictionHistory.length - 1];
         } else {
-            lastPrediction = predictNext(); // Recalculate if no history
+            lastPrediction = predictNext();
         }
         lastPredictionOutcome = null;
     }
 
     updateSummaryStats();
-    rebuildChartFromHistory(); // Update chart and theme
+    rebuildChartFromHistory();
 
+    // Recalculate what the next prediction should be based on the new state
     const nextPredictionAfterUndo = predictNext();
     lastPrediction = nextPredictionAfterUndo;
     displayPrediction(lastPrediction);
 
     setStatusMessage("ย้อนกลับสำเร็จ", "text-green-600", textInputStatus);
 }
+
 
 // --- Log File Function ---
 function downloadLogFile() {
@@ -537,7 +543,7 @@ function downloadLogFile() {
 // --- Reset and Clear Functions ---
 function clearAppState(resetNameToDefault = true) {
     results = []; tieWins = 0; rounds = 0; currentFillRow = 0; currentFillCol = 0;
-    predictionScore = 0; consecutiveLosses = 0; consecutiveWins = 0; lastPrediction = '-';
+    predictionScore = 1; consecutiveLosses = 0; consecutiveWins = 0; lastPrediction = '-';
     predictionAttemptNumber = 0; lastPredictionOutcome = null; totalPredictionWins = 0; totalPredictionLosses = 0;
     scoreHistory = []; winStreakCounts = {}; lossStreakCounts = {}; consecutiveWinsHistory = [];
     consecutiveLossesHistory = []; winStreakCountsHistory = []; lossStreakCountsHistory = [];
@@ -553,7 +559,7 @@ function clearAppState(resetNameToDefault = true) {
 function clearCurrentSession() {
     clearAppState(true);
     initializeGrid();
-    rebuildChartFromHistory(); // Will clear and update theme
+    rebuildChartFromHistory();
     displayPrediction('-');
     updateSummaryStats();
     console.log("Current session cleared.");
@@ -594,7 +600,7 @@ function handleTextInput() {
         } else { invalidChars.push(char); }
     }
     isProcessingTextInput = false;
-    if (chartNeedsUpdate) { rebuildChartFromHistory(); } // Update chart after loop
+    if (chartNeedsUpdate) { rebuildChartFromHistory(); }
 
     let finalStatus = `เพิ่ม ${addedCount} ตัวสำเร็จ`;
     if (invalidChars.length > 0) { finalStatus += `. ไม่รู้จัก: ${invalidChars.join(', ')}`; }
@@ -715,26 +721,19 @@ function handleNewSession() {
 
 // --- Helper Functions ---
 function setStatusMessage(message, cssClass, element, duration = 3000) {
-    // Determine text color based on theme for status messages
-    const isDark = document.body.classList.contains('dark');
-    let baseTextColorClass = 'text-gray-500'; // Default muted color
-    if (isDark) {
-        baseTextColorClass = 'text-gray-400'; // Lighter muted for dark mode
-    }
-
-    // Combine base classes with specific message class
+    const baseTextColorClass = document.body.classList.contains('dark') ? 'text-gray-400' : 'text-gray-500';
     element.textContent = message;
-    element.className = `text-xs mt-1 h-4 ${cssClass || baseTextColorClass}`; // Use provided class or default muted
+    element.className = `text-xs mt-1 h-4 ${cssClass || baseTextColorClass}`;
 
     if (message && duration > 0) {
         setTimeout(() => {
             if (element.textContent === message) {
                 element.textContent = '';
-                element.className = `text-xs text-gray-500 mt-1 h-4 ${baseTextColorClass}`; // Reset to default muted
+                element.className = `text-xs mt-1 h-4 ${baseTextColorClass}`;
             }
         }, duration);
     } else if (!message) {
-        element.className = `text-xs text-gray-500 mt-1 h-4 ${baseTextColorClass}`; // Reset class if clearing message
+        element.className = `text-xs mt-1 h-4 ${baseTextColorClass}`;
     }
 }
 
@@ -759,10 +758,10 @@ themeToggleButton.addEventListener("click", toggleTheme);
 
 // --- Initial Setup ---
 window.onload = () => {
-    loadTheme(); // Apply saved theme first
+    loadTheme();
     initializeGrid();
-    initializeChart(); // Initialize chart AFTER theme is applied
+    initializeChart();
     populateSessionList();
-    clearCurrentSession(); // Start with a clean default session state (doesn't affect theme)
+    clearCurrentSession();
     console.log("Baccarat tracker with session and theme management initialized.");
 };

@@ -366,104 +366,124 @@ button:active {
 .btn-banker {
     background-color: #dc2626;
     padding: 10px;
+    color: white;
 }
 
 .btn-banker:hover {
     background-color: #b91c1c;
     padding: 10px;
+    color: white;
 }
 
 .btn-player {
     background-color: #2563eb;
     padding: 10px;
+    color: white;
 }
 
 .btn-player:hover {
     background-color: #1d4ed8;
     padding: 10px;
+    color: white;
 }
 
 .btn-tie {
     background-color: #16a34a;
     padding: 10px;
+    color: white;
 }
 
 .btn-tie:hover {
     background-color: #15803d;
     padding: 10px;
+    color: white;
 }
 
 .btn-undo {
     background-color: #f97316;
     padding: 10px;
+    color: white;
 }
 
 .btn-undo:hover {
     background-color: #ea580c;
     padding: 10px;
+    color: white;
 }
 
 .btn-reset-normal {
     background-color: #6b7280;
     padding: 10px;
+    color: white;
 }
 
 /* Gray-500 */
 .btn-reset-normal:hover {
     background-color: #4b5563;
     padding: 10px;
+    color: white;
 }
 
 /* Gray-600 */
 .btn-reset-save {
     background-color: #ca8a04;
     padding: 10px;
+    color: white;
 }
 
 .btn-reset-save:hover {
     background-color: #a16207;
     padding: 10px;
+    color: white;
 }
 
 .btn-save-session {
     background-color: #9333ea;
     padding: 10px;
+    color: white;
 }
 
 .btn-save-session:hover {
     background-color: #7e22ce;
     padding: 10px;
+    color: white;
 }
 
 .btn-load-session {
     background-color: #0ea5e9;
     padding: 10px;
+    color: white;
 }
 
 .btn-load-session:hover {
     background-color: #0284c7;
     padding: 10px;
+    color: white;
 }
 
 .btn-delete-session {
     background-color: #e11d48;
     padding: 10px;
+    color: white;
 }
 
 .btn-delete-session:hover {
     background-color: #be123c;
     padding: 10px;
+    color: white;
 }
 
 .btn-new-session {
     background-color: #64748b;
     padding: 10px;
+    color: white;
 }
 
 /* Slate-500 */
 .btn-new-session:hover {
     background-color: #475569;
     padding: 10px;
+    color: white;
 }
 
 /* Slate-600 */
